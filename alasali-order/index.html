@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b2443">
+<title>طلبات إخوان العسلي</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#f3f5f8;font-family:Tahoma,Arial,sans-serif;color:#152033;padding-bottom:92px}
+header{background:linear-gradient(135deg,#081d38,#113a66);color:#fff;padding:22px 16px 18px;text-align:center;position:sticky;top:0;z-index:3;box-shadow:0 5px 22px #0b244329}
+.brand{font-size:22px;font-weight:800;letter-spacing:.2px} .en{font-size:11px;letter-spacing:2px;color:#d6b56b;margin-top:4px} .sub{font-size:12px;color:#d7e1eb;margin-top:8px}
+main{max-width:1050px;margin:auto;padding:12px}
+.search{background:#fff;border:1px solid #e2e7ee;border-radius:15px;padding:10px;box-shadow:0 4px 14px #0000000b}
+#q{width:100%;border:0;outline:0;font-size:16px;padding:5px;background:transparent}
+.chips{display:flex;gap:7px;overflow:auto;padding:10px 0 3px;scrollbar-width:none} .chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:1px solid #dfe5ec;background:#fff;color:#26384d;border-radius:999px;padding:8px 12px;font-size:12px}
+.chip.on{background:#0b2443;color:#fff;border-color:#0b2443}
+#count{font-size:12px;color:#64748b;margin:9px 2px}
+#g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.card{background:#fff;border:1px solid #e3e8ef;border-radius:16px;padding:10px;box-shadow:0 3px 12px #0000000a;display:flex;flex-direction:column}
+.icon{font-size:39px;text-align:center;background:#f8fafc;border-radius:12px;padding:10px 6px}
+.name{font-size:12px;font-weight:800;line-height:1.5;min-height:54px;margin:8px 0 4px}
+.meta{font-size:10px;color:#7b8794;margin-bottom:6px}
+.price{font-size:17px;font-weight:900;color:#0b2443} .unit{font-size:10px;color:#7b8794}
+.qty{display:grid;grid-template-columns:38px 1fr 38px;border:1px solid #dce3eb;border-radius:11px;overflow:hidden;height:39px;margin-top:8px}
+.qty button{border:0;background:#eef2f6;color:#0b2443;font-size:21px;font-weight:bold} .qty input{border:0;outline:0;text-align:center;width:100%;font-size:15px;font-weight:bold}
+.line{font-size:10px;color:#168a54;margin-top:6px}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #dfe4ea;padding:9px 11px calc(9px + env(safe-area-inset-bottom));z-index:4;box-shadow:0 -4px 20px #00000010}
+.barin{max-width:1050px;margin:auto;display:flex;align-items:center;gap:10px} .sum{min-width:125px;color:#0b2443} .sum small{color:#718096} .sum strong{font-size:18px}
+#go{flex:1;border:0;background:#0b2443;color:white;border-radius:12px;height:49px;font-size:14px;font-weight:800} #go:disabled{opacity:.4}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:8;align-items:flex-end} .modal.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:650px;margin:auto;border-radius:20px 20px 0 0;padding:16px;max-height:92vh;overflow:auto}
+.sheet h2{font-size:18px;margin:0 0 10px} .sheet input,.sheet textarea{width:100%;padding:12px;margin:5px 0;border:1px solid #dce2e9;border-radius:10px;font-size:14px}
+#lines{font-size:12px;line-height:1.8;background:#f8fafc;border-radius:12px;padding:10px;margin:10px 0}
+.wa,.close{width:100%;border:0;border-radius:11px;padding:13px;margin-top:7px;font-weight:800;font-size:14px} .wa{background:#169c57;color:white} .close{background:#edf1f5;color:#24364b}
+.note{font-size:10px;color:#7b8794;margin-top:8px;line-height:1.6}
+@media(min-width:720px){#g{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">شركة إخوان العسلي للمواد الغذائية</div>
+<div class="en">ALASALI BROTHERS</div>
+<div class="sub">اختر الأصناف والكميات، ثم أرسل الطلب مباشرة عبر واتساب</div>
+</header>
+<main>
+<div class="search"><input id="q" placeholder="ابحث باسم الصنف أو رقمه..."></div>
+<div id="chips" class="chips"></div>
+<div id="count"></div>
+<div id="g"></div>
+</main>
+<div class="bar"><div class="barin"><div class="sum"><small id="ct">0 صنف</small><br><strong><span id="tt">0</span> شيكل</strong></div><button id="go" disabled>مراجعة وإرسال الطلب</button></div></div>
+<div id="modal" class="modal"><div class="sheet">
+<h2>مراجعة الطلب</h2>
+<input id="nm" placeholder="اسم الزبون / المحل *">
+<input id="ph" inputmode="tel" placeholder="رقم الهاتف *">
+<input id="ci" placeholder="المدينة / المنطقة">
+<textarea id="no" rows="2" placeholder="ملاحظات"></textarea>
+<div id="lines"></div>
+<div><strong>إجمالي الطلب: <span id="mt">0</span> شيكل</strong></div>
+<div class="note">الطلب المرسل هو طلب مبدئي، ويعتمد السعر والتوفر النهائيان عند تأكيد الشركة.</div>
+<button id="wa" class="wa">إرسال الطلب عبر واتساب</button>
+<button id="close" class="close">إغلاق</button>
+</div></div>
+<script>
+const P=[[1,"ترند وردة دبي",50.0,"أخرى","🍬"],[2,"بسكوت سجاير روفل شوكلاتة، فراولة، فانيلا",16.0,"بسكويت وكيك","🍪"],[3,"بسكوت بسكيز المحشو بالشوكلاتة",8.5,"بسكويت وكيك","🍪"],[4,"جلي مع قطه جوز هند",9.0,"جيلي وجوم","🍭"],[5,"علكة + جلي بينز علب",9.0,"علكة","🫧"],[6,"دربس كولا +فانتا +سبرابت",9.0,"حلويات وسكاكر","🍬"],[7,"علكة باببل جام علبة بلاستك",9.0,"علكة","🫧"],[8,"مروحة مع جوم اسنان وعين",9.0,"جيلي وجوم","🍭"],[9,"حلوى اسواره شكل ساعه",5.5,"حلويات وسكاكر","🍬"],[10,"حلوى اسوارة شكل نجمه",5.5,"حلويات وسكاكر","🍬"],[11,"نوجا مطاطية بطعم الكولا والفواكه المميزة",9.0,"حلويات وسكاكر","🍬"],[12,"جوم جوجو 1 كيلو متوفر العديد من الاشكال والاطعمه تركي",11.0,"جيلي وجوم","🍭"],[13,"بسكوت دوائر توب تشويس دجاج",8.25,"بسكويت وكيك","🍪"],[14,"بسكوت اصابع توب تشويس بيتزا",8.25,"بسكويت وكيك","🍪"],[15,"كيك 3s شوكلاتة بيضه",8.5,"بسكويت وكيك","🍪"],[16,"كيك شوكو بايت طعم موز وطعم شوكلاته",8.5,"بسكويت وكيك","🍪"],[17,"بسكوت بلومبر محشي فراولة",8.5,"بسكويت وكيك","🍪"],[18,"بسكوت بلومبر محشي جوز هند",8.5,"بسكويت وكيك","🍪"],[19,"بسكوت بلومبر محشي مارشميلو",8.5,"مارشميلو","☁️"],[20,"بسكوت بلومبر محشي مارشميلو بطعم الموز",8.5,"مارشميلو","☁️"],[21,"علكة قلم كرايون",9.0,"علكة","🫧"],[22,"سرنجه شوكلاتة",9.0,"حلويات وسكاكر","🍬"],[23,"جومي ستار توتي فروتي",9.0,"جيلي وجوم","🍭"],[24,"ميني سور جوم",9.0,"جيلي وجوم","🍭"],[25,"سور كرنشي حامض",9.0,"حلويات وسكاكر","🍬"],[26,"مصاص المونديال مع سكر",9.0,"حلويات وسكاكر","🍬"],[27,"عصير بوب عجل",9.0,"مشروبات وعصائر","🥤"],[28,"مصاص فرشاه مع عسل",9.0,"حلويات وسكاكر","🍬"],[29,"سوس حيه مع عسل",9.0,"حلويات وسكاكر","🍬"],[30,"نوجا قوس قزح حامضة",9.0,"حلويات وسكاكر","🍬"],[31,"مارشميلو فلافل محشي",9.0,"مارشميلو","☁️"],[32,"جلي حية حجم كبير 70 غم",9.0,"جيلي وجوم","🍭"],[33,"مارشميلو نقانق مع عسل",9.0,"مارشميلو","☁️"],[34,"مارشميلو طويل اكياس",8.0,"مارشميلو","☁️"],[35,"علكة رمزون مسطرة",9.0,"علكة","🫧"],[36,"علكة مع عسل فراولة وبطيخ",9.0,"علكة","🫧"],[37,"بوب روك سكر مفرقع",9.0,"حلويات وسكاكر","🍬"],[38,"نوجا فيز طبقتين",9.0,"حلويات وسكاكر","🍬"],[39,"علكة اسيد مع بودرة",9.0,"علكة","🫧"],[40,"بيض مطربان 120 حبه",37.0,"أخرى","🍬"],[41,"مارشميلو برجر شمام",9.0,"مارشميلو","☁️"],[42,"علكة لابوبو",9.0,"علكة","🫧"],[43,"سوبر سور حبيبات كيس",9.0,"حلويات وسكاكر","🍬"],[44,"سور بوي حامض",9.0,"حلويات وسكاكر","🍬"],[45,"مارشميلو مع زنبرك قوس قزح",9.0,"مارشميلو","☁️"],[46,"سوبر سور حامض حبيبات باربعة اطعمة",9.0,"حلويات وسكاكر","🍬"],[47,"مارشميلو فرايز مع كاتشاب عسل ووشم",9.0,"مارشميلو","☁️"],[48,"مكعبات ملبس سور كاندي",9.0,"حلويات وسكاكر","🍬"],[49,"نوجا حبيبات كيس بأطعمة الكولا والفانتا والسبرايت",9.0,"حلويات وسكاكر","🍬"],[50,"مارشميلو بوظه",9.0,"مارشميلو","☁️"],[51,"علكة حبيبات شريط",9.0,"علكة","🫧"],[52,"سوس شعر",8.5,"حلويات وسكاكر","🍬"],[53,"نودلز كرسبي",9.0,"أخرى","🍬"],[54,"جوم بلجيكي اربع اطعمه",15.0,"جيلي وجوم","🍭"],[55,"مارشميلو لاف",9.0,"مارشميلو","☁️"],[56,"حبيبات الشوكلاتة",9.0,"حلويات وسكاكر","🍬"],[57,"سي سي",8.0,"أخرى","🍬"],[58,"علكة بوم اصابع",8.0,"علكة","🫧"],[59,"سي سي ارابيلا طويل 60 سم",18.0,"أخرى","🍬"],[60,"توتي فروتي قلوب شريط 15 غم",9.0,"أخرى","🍬"],[61,"مارشميلو طويل",9.0,"مارشميلو","☁️"],[62,"اصبع سور حامض مع بودرة حامضة",9.0,"حلويات وسكاكر","🍬"],[63,"حبيبات سور بايتس الحامصة الطرية",9.0,"حلويات وسكاكر","🍬"],[64,"حلوى المهرج الحامضة",9.0,"حلويات وسكاكر","🍬"],[65,"علكة مع مارشميلو",9.0,"مارشميلو","☁️"],[66,"سترونج اسيد نوجا وملبس",9.0,"حلويات وسكاكر","🍬"],[67,"امبوز 50 سم",15.0,"أخرى","🍬"],[68,"جلي تيم",14.0,"جيلي وجوم","🍭"],[69,"حلوى النرد مع صورة",9.0,"حلويات وسكاكر","🍬"],[70,"جلي هابي ظرافه",9.0,"جيلي وجوم","🍭"],[71,"لسان جوم طويل",14.0,"جيلي وجوم","🍭"],[72,"مارشميلو اشكال مصاص",8.0,"مارشميلو","☁️"],[73,"مصاص 28 غم مع علكة 3 اطعمه",6.75,"علكة","🫧"],[74,"عسل قنبله",74.0,"أخرى","🍬"],[75,"علكة فور يو",6.5,"علكة","🫧"],[76,"جلي قلب",9.0,"جيلي وجوم","🍭"],[77,"اصابع علكة ستيك",8.25,"علكة","🫧"],[78,"كومبو حبيبات شوكلاته",8.5,"حلويات وسكاكر","🍬"],[79,"جوم طابات امبوز قوس قزح",9.0,"جيلي وجوم","🍭"],[80,"جوم رول",9.0,"جيلي وجوم","🍭"],[81,"سور تشوي كاندي نوجا حامضة",9.0,"حلويات وسكاكر","🍬"],[82,"مصاص لايك",8.0,"حلويات وسكاكر","🍬"],[83,"جلي عنكبوت",9.0,"جيلي وجوم","🍭"],[84,"مصاص خاتم مضيء",8.25,"حلويات وسكاكر","🍬"],[85,"علكه زي زي",6.5,"علكة","🫧"],[86,"عصير ايس تولين",24.0,"مشروبات وعصائر","🥤"],[87,"عصير تيم 200 غم",13.0,"مشروبات وعصائر","🥤"],[88,"عصير حلا 200غم",14.0,"مشروبات وعصائر","🥤"],[89,"عصير توب تن 200ملعنب مانجا كولا",14.0,"مشروبات وعصائر","🥤"],[90,"كرواسون مونو محشو شوكلاتة",21.0,"بسكويت وكيك","🍪"],[91,"سي سي بودرة طويل",17.0,"أخرى","🍬"],[92,"مصاص اوريو مع عصاه مضيئة",9.0,"حلويات وسكاكر","🍬"],[93,"حبيبات الشوكلاتة كرت الحجم لكبير",8.25,"حلويات وسكاكر","🍬"],[94,"نوجا حامضة مسطرة بطعم الكولا والفراولة",8.25,"حلويات وسكاكر","🍬"],[95,"علكة فريشا المحشية بالعسل",8.25,"علكة","🫧"],[96,"نوجا فروتشو بثلاث اطعمه فراولة، تفاح، برتقال",8.25,"حلويات وسكاكر","🍬"],[97,"علكة جوما مع وشم بأربعة اطعمة مميزة",8.25,"علكة","🫧"],[98,"مشروب الطاقة أوبر عالي الجودة بالطعم الأصلي",50.0,"مشروبات وعصائر","🥤"],[99,"مشروب الطاقة أوبر عالي الجودة بطعم الأناناس الطازج",50.0,"مشروبات وعصائر","🥤"],[100,"مشروب الطاقة أوبر عالي الجودة بطعم البيري",50.0,"مشروبات وعصائر","🥤"],[101,"مشروب الطاقة أوبر عالي الجودة بطعم التفاح الأخضر الطازج",50.0,"مشروبات وعصائر","🥤"],[102,"روب بندورة ارابيلا اعلى تركيز 28%-30%",40.0,"أخرى","🍬"]];
+const WHATSAPP='970599808008';
+const cats=['الكل',...new Set(P.map(x=>x[3]))];
+let cat='الكل', cart={};
+try{cart=JSON.parse(localStorage.getItem('alasali_cart')||'{}')}catch(e){cart={}}
+const $=s=>document.querySelector(s), money=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
+function filtered(){const q=$('#q').value.trim();return P.filter(x=>(cat==='الكل'||x[3]===cat)&&(!q||x[1].includes(q)||String(x[0]).includes(q)))}
+function drawChips(){$('#chips').innerHTML=cats.map(c=>`<button class="chip ${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{cat=b.dataset.c;drawChips();render()})}
+function render(){const rows=filtered();$('#count').textContent=`عرض ${rows.length} من ${P.length} صنف`;$('#g').innerHTML=rows.map(x=>{const v=cart[x[0]]||0;return `<div class="card" data-id="${x[0]}"><div class="icon">${x[4]}</div><div class="name">${x[1]}</div><div class="meta">رقم الصنف: ${x[0]} · ${x[3]}</div><div><span class="price">${money(x[2])} شيكل</span> <span class="unit">/ وحدة السعر</span></div><div class="qty"><button data-a="plus">+</button><input type="number" min="0" value="${v}"><button data-a="minus">−</button></div><div class="line">الإجمالي: ${money(x[2]*v)} شيكل</div></div>`}).join('');
+document.querySelectorAll('.card').forEach(el=>{const id=+el.dataset.id, inp=el.querySelector('input');el.querySelector('[data-a=plus]').onclick=()=>setQty(id,+inp.value+1);el.querySelector('[data-a=minus]').onclick=()=>setQty(id,Math.max(0,+inp.value-1));inp.onchange=()=>setQty(id,Math.max(0,Math.floor(+inp.value||0)))});update()}
+function setQty(id,v){if(v)cart[id]=v;else delete cart[id];localStorage.setItem('alasali_cart',JSON.stringify(cart));render()}
+function items(){return P.filter(x=>cart[x[0]]).map(x=>[x,cart[x[0]],x[2]*cart[x[0]]])}
+function update(){const a=items(),t=a.reduce((s,x)=>s+x[2],0);$('#ct').textContent=a.length+' صنف';$('#tt').textContent=money(t);$('#go').disabled=!a.length}
+$('#q').oninput=render;
+$('#go').onclick=()=>{const a=items(),t=a.reduce((s,x)=>s+x[2],0);$('#lines').innerHTML=a.map(x=>`<div>${x[0][1]} × ${x[1]} = <b>${money(x[2])} شيكل</b></div>`).join('');$('#mt').textContent=money(t);$('#modal').classList.add('on')};
+$('#close').onclick=()=>$('#modal').classList.remove('on');
+$('#modal').onclick=e=>{if(e.target.id==='modal')$('#modal').classList.remove('on')};
+$('#wa').onclick=()=>{const n=$('#nm').value.trim(),p=$('#ph').value.trim();if(!n||!p)return alert('يرجى إدخال اسم الزبون ورقم الهاتف');const a=items(),t=a.reduce((s,x)=>s+x[2],0);let z=`طلب جديد – شركة إخوان العسلي\nالزبون/المحل: ${n}\nالهاتف: ${p}`;if($('#ci').value.trim())z+=`\nالمدينة/المنطقة: ${$('#ci').value.trim()}`;z+='\n\nالأصناف المطلوبة:\n';a.forEach((x,i)=>z+=`${i+1}) ${x[0][1]}\nالكمية: ${x[1]} × ${money(x[0][2])} = ${money(x[2])} شيكل\n`);z+=`\nإجمالي الطلب: ${money(t)} شيكل`;if($('#no').value.trim())z+=`\nملاحظات: ${$('#no').value.trim()}`;window.location.href='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(z)};
+drawChips();render();
+</script>
+</body></html>
