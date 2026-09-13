@@ -1,0 +1,21 @@
+{
+  "name": "tajerflow-v1-9-vercel",
+  "version": "0.1.900",
+  "private": true,
+  "scripts": {"build": "node bootstrap.cjs", "start": "next start"},
+  "dependencies": {
+    "@supabase/ssr": "0.12.5",
+    "@supabase/supabase-js": "2.112.4",
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "@next/swc-linux-x64-gnu": "16.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "typescript": "5.8.3"
+  },
+  "engines": {"node": "22.x"}
+}
