@@ -1,8 +1,8 @@
 {
-  "name": "tajerflow-v1-9-vercel",
+  "name": "tajerflow-pilot-ui-v19-visit-performance-buildfix",
   "version": "0.1.900",
   "private": true,
-  "scripts": {"build": "node bootstrap.cjs", "start": "next start"},
+  "scripts": {"build": "node build.cjs", "start": "next start"},
   "dependencies": {
     "@supabase/ssr": "0.12.5",
     "@supabase/supabase-js": "2.112.4",
