@@ -1,8 +1,11 @@
 {
-  "name": "tajerflow-pilot-ui-v19-visit-performance-buildfix",
-  "version": "0.1.900",
+  "name": "tajerflow-pilot-ui-v110-visit-audit-buildfix",
+  "version": "0.1.1000",
   "private": true,
-  "scripts": {"build": "node build.cjs", "start": "next start"},
+  "scripts": {
+    "build": "node build.cjs",
+    "start": "next start"
+  },
   "dependencies": {
     "@supabase/ssr": "0.12.5",
     "@supabase/supabase-js": "2.112.4",
@@ -17,5 +20,7 @@
     "@types/react-dom": "19.2.2",
     "typescript": "5.8.3"
   },
-  "engines": {"node": "22.x"}
+  "engines": {
+    "node": "22.x"
+  }
 }
